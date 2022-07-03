@@ -1,3 +1,8 @@
+window.addEventListener('keydown', function(e) {
+  if(e.keyCode == 32 && e.target == document.body) {
+    e.preventDefault();
+  }
+});
 let Schedule = [{
   Time:9,
   task:""
@@ -52,6 +57,7 @@ Schedule.forEach(e =>{
   taskDiv.text(e.task)
   taskDiv.attr('class',"description col-lg-8")
   taskDiv.css("background-color", rowColor);
+  taskDiv.attr("contentEditable","true")
 
   let iconDiv = $('<div>')
   iconDiv.attr('class','saveBtn col-lg-2')
@@ -61,3 +67,10 @@ rowDiv.append(hourDiv,taskDiv,iconDiv)
 $('.container').append(rowDiv)
   
 })
+
+$('.saveBtn').child().on('click',saveTask)
+
+function saveTask(e){
+  
+}
+console.log($('div'))
