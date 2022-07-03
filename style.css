@@ -40,6 +40,12 @@ textarea {
   background-color: #ffffff;
   color: #000000;
   display: flex;
+  font-size: 150%;
+  height: 100%;
+  justify-content: end;
+  align-items: center;
+  border-top:    1px solid black;
+  border-right:  1px solid black; 
 }
 
 .past {
@@ -65,7 +71,7 @@ textarea {
   background-color: #06aed5;
   color: white;
 }
-.saveBtn i, .hour h3{
+.saveBtn i {
   margin: auto;
   font-size: 150% ;
 }
