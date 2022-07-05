@@ -1,7 +1,8 @@
+//getting the schedule from the local storage
 let storedScheduleArr = JSON.parse(localStorage.getItem("storedSchedule"))
-
-console.log(storedScheduleArr)
+//getting the current date
 var date = moment().format('MM,Do,YY')
+//if the local stoarage is empty or the date is different, it will give a new one
 if(storedScheduleArr == null || storedScheduleArr[0] != date){
 let Schedule = [date,[
   {
