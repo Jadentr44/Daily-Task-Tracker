@@ -1,57 +1,23 @@
-window.addEventListener('keydown', function(e) {
-  if(e.keyCode == 32 && e.target == document.body) {
-    e.preventDefault();
-  }
-});
-let Schedule = [{
-  Time:9,
-  task:""
-},{
-  Time:10,
-  task:""
-},{
-  Time:11,
-  task:""
-},{
-  Time:12,
-  task:""
-},{
-  Time:13,//1
-  task:""
-},{
-  Time:14,//1
-  task:""
-},{
-  Time:15,//1
-  task:"feed"
-},{
-  Time:16,//1
-  task:""
-},{
-  Time:17,//5
-  task:""
-}]
+let pulledSchedule = JSON.parse(localStorage.getItem("storedSchedule"));
 
-
-let date = moment().format('MM,Do,YY')
-console.log(date)
 let hour = moment().format('H')
 console.log(hour)
-let saveIconHtml = `<i class="fa fa-save"></i>`
+let saveIconHtml = `<i class="saveIcon fa fa-save"></i>`
 
-Schedule.forEach(e =>{
+pulledSchedule[1].forEach(e =>{
   let rowColor = "red"
   if(e.Time > hour){rowColor = "green"}
-  if(e.Time < hour){rowColor = "gray"}
+  if(e.Time < hour){rowColor = "lightgray"}
 
- 
-  console.log(`current hour:${hour} vs ${e.Time}`)
+ let AMPM = "am";
+ if(e.Time > 11){AMPM = "pm"}
   let rowDiv = $('<div>')
   rowDiv.attr("class","row")
 
   let hourDiv = $('<div>')
+  hourDiv.attr('data-Mhour',e.Time)
   hourDiv.attr('class','hour col-lg-2')
-  hourDiv.text(moment(e.Time,'H').format('h'))
+  hourDiv.text(moment(e.Time,'H').format('h')+AMPM)
 
   let taskDiv = $('<div>')
   taskDiv.text(e.task)
@@ -65,12 +31,21 @@ Schedule.forEach(e =>{
 
 rowDiv.append(hourDiv,taskDiv,iconDiv)
 $('.container').append(rowDiv)
-  
+
 })
 
-$('.saveBtn').child().on('click',saveTask)
+$('.saveIcon').on('click',saveTask)
 
-function saveTask(e){
-  
+function saveTask(e){ 
+  let slecectedRow = $(e.target).parent().parent()
+  let selectedTask = slecectedRow.children().eq(1).text()
+  let selectedHour = slecectedRow.children().eq(0).attr("data-Mhour");
+  console.log(selectedTask)
+  pulledSchedule[1].forEach(e =>{
+    if(e.Time == selectedHour){
+      console.log("they match")
+      e.task = selectedTask
+    }
+  })
+  localStorage.setItem("storedSchedule",JSON.stringify(pulledSchedule))
 }
-console.log($('div'))
