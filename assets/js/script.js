@@ -4,8 +4,8 @@ let pulledSchedule = JSON.parse(localStorage.getItem("storedSchedule"));
 //setting the displayed date
 $("#currentDay").text(moment().format("MMMM,Do,YYYY"))
 //getting the hour in Military time
-// let hour = moment().format('H')
-let hour = 11
+let hour = moment().format('H')
+// let hour = 11 (for testing purposes)
 
 let saveIconHtml = `<i class="saveIcon fa fa-save"></i>`
 
